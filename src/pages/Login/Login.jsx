@@ -8,8 +8,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
@@ -18,12 +18,20 @@ const defaultTheme = createTheme();
 export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
   const nav = useNavigate();
-  const state = useSelector((state) => state);
-  console.log(state);
+  const dispatch = useDispatch();
+  const { isLoggedin } = useSelector((state) => state.login);
   const handleSubmit = (event) => {
     event.preventDefault();
     const { email, password } = form;
     if (email === "test@gmail.com" && password === "12345") {
+      const user = {
+        name: "David",
+        email: "test@gmail.com",
+        phone: "999999999",
+      };
+      localStorage.setItem("isLoggedin", true);
+      localStorage.setItem("loggedUser", JSON.stringify(user));
+      dispatch({ type: "SET_LOGIN", payload: user });
       nav("/");
     } else {
       alert("Error");
@@ -34,7 +42,9 @@ export default function Login() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  return (
+  return isLoggedin ? (
+    <Navigate to="/" />
+  ) : (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />

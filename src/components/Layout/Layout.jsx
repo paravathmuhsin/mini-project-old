@@ -9,13 +9,11 @@ import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import {
   Avatar,
@@ -26,8 +24,9 @@ import {
   MenuItem,
   Tooltip,
 } from "@mui/material";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import { Logout, Settings } from "@mui/icons-material";
+import { useDispatch, useSelector } from "react-redux";
 
 const drawerWidth = 240;
 
@@ -86,6 +85,8 @@ export default function Layout() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const menuOpen = Boolean(anchorEl);
   const nav = useNavigate();
+  const { isLoggedin, loggedUser } = useSelector((state) => state.login);
+  const dispatch = useDispatch();
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -93,9 +94,11 @@ export default function Layout() {
     setAnchorEl(null);
   };
   const logout = () => {
+    localStorage.clear();
+    dispatch({ type: "SET_LOGOUT" });
     nav("/login");
   };
-  return (
+  return isLoggedin ? (
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
@@ -135,7 +138,9 @@ export default function Layout() {
                 aria-haspopup="true"
                 aria-expanded={menuOpen ? "true" : undefined}
               >
-                <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+                <Avatar sx={{ width: 32, height: 32 }}>
+                  {loggedUser.name[0]}
+                </Avatar>
               </IconButton>
             </Tooltip>
             <Menu
@@ -236,5 +241,7 @@ export default function Layout() {
         </Box>
       </Box>
     </ThemeProvider>
+  ) : (
+    <Navigate to="/login" />
   );
 }
