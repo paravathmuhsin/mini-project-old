@@ -24,9 +24,11 @@ import {
   MenuItem,
   Tooltip,
 } from "@mui/material";
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import { Link, Navigate, Outlet, useNavigate } from "react-router-dom";
 import { Logout, Settings } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
+import { setLogout } from "../../store/actions/login.action";
+import { useAppContext } from "../AppContext/AppContext";
 
 const drawerWidth = 240;
 
@@ -78,6 +80,7 @@ const Drawer = styled(MuiDrawer, {
 const defaultTheme = createTheme();
 
 export default function Layout() {
+  const { appTitle } = useAppContext();
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -95,7 +98,7 @@ export default function Layout() {
   };
   const logout = () => {
     localStorage.clear();
-    dispatch({ type: "SET_LOGOUT" });
+    dispatch(setLogout());
     nav("/login");
   };
   return isLoggedin ? (
@@ -127,7 +130,7 @@ export default function Layout() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+              {appTitle}
             </Typography>
             <Tooltip title="Account settings">
               <IconButton
@@ -208,12 +211,14 @@ export default function Layout() {
           </Toolbar>
           <Divider />
           <List component="nav">
-            <ListItemButton>
-              <ListItemIcon>
-                <DashboardIcon />
-              </ListItemIcon>
-              <ListItemText primary="Home" />
-            </ListItemButton>
+            <Link to="/">
+              <ListItemButton>
+                <ListItemIcon>
+                  <DashboardIcon />
+                </ListItemIcon>
+                <ListItemText primary="Posts" />
+              </ListItemButton>
+            </Link>
           </List>
         </Drawer>
         <Box

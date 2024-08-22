@@ -10,6 +10,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { setLogin } from "../../store/actions/login.action";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
@@ -31,7 +32,7 @@ export default function Login() {
       };
       localStorage.setItem("isLoggedin", true);
       localStorage.setItem("loggedUser", JSON.stringify(user));
-      dispatch({ type: "SET_LOGIN", payload: user });
+      dispatch(setLogin(user));
       nav("/");
     } else {
       alert("Error");
