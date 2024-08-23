@@ -3,7 +3,9 @@ import { useParams } from "react-router-dom";
 import Title from "../../components/Title/Title";
 import { getPost } from "../../models/post.model";
 import { useAppContext } from "../../components/AppContext/AppContext";
+import { Skeleton, Typography } from "@mui/material";
 
+const variants = ["h3", "body1", "body1"];
 const Details = () => {
   const [post, setPost] = useState();
   const { setAppTitle } = useAppContext();
@@ -21,11 +23,17 @@ const Details = () => {
   return (
     <>
       <Title>Post details</Title>
-      {post && (
+      {post ? (
         <div>
-          <h2>{post.title}</h2>
-          <p>{post.body}</p>
+          <Typography component={"h3"} variant="h5">{post.title}</Typography>
+          <Typography component={"p"} variant="body1">{post.body}</Typography>
         </div>
+      ) : (
+        variants.map((variant) => (
+          <Typography component="div" key={variant} variant={variant}>
+            <Skeleton />
+          </Typography>
+        ))
       )}
     </>
   );

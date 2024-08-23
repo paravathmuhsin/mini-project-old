@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Title from "../../components/Title/Title";
 import {
   Paper,
+  Skeleton,
   Table,
   TableBody,
   TableCell,
@@ -10,20 +11,27 @@ import {
   TableRow,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { getPosts } from "../../models/post.model";
 import { useAppContext } from "../../components/AppContext/AppContext";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPosts } from "../../store/actions/post.action";
 
 const Posts = () => {
   const { setAppTitle } = useAppContext();
-  const [posts, setPosts] = useState([]);
+  // const [posts, setPosts] = useState([]);
+  const posts = useSelector((state) => state.post.posts);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    getPosts().then((res) => {
-      setPosts(res);
-    });
-  }, []);
+    // getPosts().then((res) => {
+    //   setPosts(res);
+    // });
+    if (!posts.length) {
+      dispatch(fetchPosts());
+    }
+  }, [dispatch, posts.length]);
   useEffect(() => {
     setAppTitle("Posts");
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>
@@ -37,17 +45,31 @@ const Posts = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {posts.map((row) => (
-              <TableRow
-                key={row.id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  <Link to={"/posts/" + row.id}>{row.title}</Link>
-                </TableCell>
-                <TableCell>{row.body}</TableCell>
-              </TableRow>
-            ))}
+            {posts.length
+              ? posts.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      <Link to={"/posts/" + row.id}>{row.title}</Link>
+                    </TableCell>
+                    <TableCell>{row.body}</TableCell>
+                  </TableRow>
+                ))
+              : Array.from(Array(5).keys()).map((i) => (
+                  <TableRow
+                    key={i}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      <Skeleton height={"30px"} />
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton height={"30px"} />
+                    </TableCell>
+                  </TableRow>
+                ))}
           </TableBody>
         </Table>
       </TableContainer>
