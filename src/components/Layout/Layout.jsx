@@ -15,6 +15,7 @@ import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import ChecklistIcon from "@mui/icons-material/Checklist";
 import {
   Avatar,
   ListItemButton,
@@ -217,6 +218,14 @@ export default function Layout() {
                   <DashboardIcon />
                 </ListItemIcon>
                 <ListItemText primary="Posts" />
+              </ListItemButton>
+            </Link>
+            <Link to="todo/">
+              <ListItemButton>
+                <ListItemIcon>
+                  <ChecklistIcon />
+                </ListItemIcon>
+                <ListItemText primary="Todo" />
               </ListItemButton>
             </Link>
           </List>

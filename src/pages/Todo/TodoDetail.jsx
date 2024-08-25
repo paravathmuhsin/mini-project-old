@@ -1,0 +1,44 @@
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchTodo } from "../../store/actions/todo.action";
+import { Typography, Checkbox, FormControlLabel, Box } from "@mui/material";
+import { useParams } from "react-router-dom";
+
+const TodoDetail = () => {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const todo = useSelector((state) => state.todoReducer.todo);
+
+  useEffect(() => {
+    dispatch(fetchTodo(id));
+  }, [dispatch, id]);
+
+  if (!todo) {
+    return <div>Loading</div>;
+  }
+  return (
+    <Box display="flex" alignItems="center">
+      <Checkbox
+        checked={todo.completed}
+        disabled
+        sx={{
+          color: todo.completed ? "blue" : "grey",
+          "&.Mui-checked": {
+            color: "blue",
+          },
+        }}
+      />
+      <Typography
+        variant="h6"
+        sx={{
+          textDecoration: todo.completed ? "line-through" : "none",
+          marginLeft: "8px",
+        }}
+      >
+        {todo.title}
+      </Typography>
+    </Box>
+  );
+};
+
+export default TodoDetail;
