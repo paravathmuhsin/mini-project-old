@@ -23,7 +23,7 @@ const UserDetails = () => {
     setAppTitle("User Details");
   }, [setAppTitle]);
 
-  // Ensure latitude and longitude are parsed correctly to numbers
+  
   const lat = user?.address?.geo?.lat ? parseFloat(user.address.geo.lat) : null;
   const lng = user?.address?.geo?.lng ? parseFloat(user.address.geo.lng) : null;
 
