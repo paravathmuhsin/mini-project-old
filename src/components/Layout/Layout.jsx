@@ -14,7 +14,7 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import DashboardIcon from "@mui/icons-material/Dashboard";
+import CommentIcon from "@mui/icons-material/Comment";
 import {
   Avatar,
   ListItemButton,
@@ -103,9 +103,11 @@ export default function Layout() {
   };
   return isLoggedin ? (
     <ThemeProvider theme={defaultTheme}>
-      <Box sx={{ display: "flex" }}>
+      <Box sx={{ display: "flex" 
+}}>
         <CssBaseline />
-        <AppBar position="absolute" open={open}>
+        <AppBar position="absolute" open={open} sx={{  backgroundColor:"#753a88",
+}}>
           <Toolbar
             sx={{
               pr: "24px", // keep right padding when drawer closed
@@ -163,6 +165,7 @@ export default function Layout() {
                     height: 32,
                     ml: -0.5,
                     mr: 1,
+                  
                   },
                   "&::before": {
                     content: '""',
@@ -211,14 +214,20 @@ export default function Layout() {
           </Toolbar>
           <Divider />
           <List component="nav">
+           
             <Link to="/">
-              <ListItemButton>
-                <ListItemIcon>
-                  <DashboardIcon />
+              <ListItemButton sx={{ color:"#753a88",
+}}>
+                <ListItemIcon sx={{ color:"#753a88",
+}}>
+                 <CommentIcon sx={{ color:"#753a88",
+}} />
                 </ListItemIcon>
-                <ListItemText primary="Posts" />
+                <ListItemText primary="Comments" />
               </ListItemButton>
             </Link>
+            
+          
           </List>
         </Drawer>
         <Box

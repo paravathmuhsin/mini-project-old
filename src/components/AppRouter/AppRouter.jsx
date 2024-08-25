@@ -3,8 +3,8 @@ import { lazy, Suspense } from "react";
 import Loader from "../Loader/Loader";
 
 const Login = lazy(() => import("../../pages/Login/Login"));
-const Posts = lazy(() => import("../../pages/Post/Posts"));
-const PostsDetails = lazy(() => import("../../pages/Post/Details"));
+const Comments = lazy(() => import("../../pages/Comment/Comments"));
+const CommentsDetails = lazy(() => import("../../pages/Comment/Details"));
 const Layout = lazy(() => import("../../components/Layout/Layout"));
 
 const routes = createBrowserRouter([
@@ -14,11 +14,11 @@ const routes = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Posts />,
+        element: <Comments />,
       },
       {
-        path: 'posts/:id',
-        element: <PostsDetails />,
+        path: 'comments/:id',
+        element: <CommentsDetails />,
       },
     ],
   },
