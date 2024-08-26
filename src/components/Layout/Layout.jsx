@@ -220,7 +220,7 @@ export default function Layout() {
                 <ListItemText primary="Posts" />
               </ListItemButton>
             </Link>
-            <Link to="todo/">
+            <Link to="/todo">
               <ListItemButton>
                 <ListItemIcon>
                   <ChecklistIcon />

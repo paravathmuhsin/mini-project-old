@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTodos } from "../../store/actions/todo.action";
 import {
@@ -10,19 +10,28 @@ import {
   Box,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useAppContext } from "../../components/AppContext/AppContext";
 
 const Todos = () => {
+  const { setAppTitle } = useAppContext();
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.todoReducer.todos);
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(fetchTodos());
-  }, [dispatch]);
+    if (!todos.length) {
+      dispatch(fetchTodos());
+    }
+  }, [dispatch, todos.length]);
 
   const handleTodoClick = (id) => {
     navigate(`/todo/${id}`);
   };
+
+  useEffect(() => {
+    setAppTitle("Todo");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Box>

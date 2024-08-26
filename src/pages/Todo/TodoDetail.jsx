@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTodo } from "../../store/actions/todo.action";
-import { Typography, Checkbox, FormControlLabel, Box } from "@mui/material";
+import { Typography, Checkbox, Box } from "@mui/material";
 import { useParams } from "react-router-dom";
 
 const TodoDetail = () => {
@@ -11,7 +11,8 @@ const TodoDetail = () => {
 
   useEffect(() => {
     dispatch(fetchTodo(id));
-  }, [dispatch, id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!todo) {
     return <div>Loading</div>;
