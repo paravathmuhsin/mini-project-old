@@ -4,6 +4,7 @@ import Loader from "../Loader/Loader";
 
 const Login = lazy(() => import("../../pages/Login/Login"));
 const Posts = lazy(() => import("../../pages/Post/Posts"));
+const Albums = lazy(() => import("../../pages/Album/Albums"));
 const PostsDetails = lazy(() => import("../../pages/Post/Details"));
 const Layout = lazy(() => import("../../components/Layout/Layout"));
 
@@ -15,6 +16,10 @@ const routes = createBrowserRouter([
       {
         index: true,
         element: <Posts />,
+      },
+      {
+        path:'/album',
+        element: <Albums />,
       },
       {
         path: 'posts/:id',
