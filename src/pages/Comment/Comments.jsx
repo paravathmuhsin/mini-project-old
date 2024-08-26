@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect,  } from "react";
 import Title from "../../components/Title/Title";
 import {
   Paper,
@@ -10,17 +10,21 @@ import {
   TableRow,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { getComments } from "../../models/comment.model";
+//import { getComments } from "../../models/comment.model";
 import { useAppContext } from "../../components/AppContext/AppContext";
+import { useDispatch, useSelector } from "react-redux";
+import {fetchComments} from "../../store/actions/comment.action"
 
 const Comments = () => {
   const { setAppTitle } = useAppContext();
-  const [comments, setComments] = useState([]);
-  useEffect(() => {
-    getComments().then((res) => {
-      setComments(res);
-    });
-  }, []);
+  const comments = useSelector((state)=> state.comment.comments)
+  const dispatch = useDispatch();
+
+  useEffect(() =>{
+    if(!comments.length){
+      dispatch(fetchComments())
+    }
+  } ,[dispatch,comments.length]);
   useEffect(() => {
     setAppTitle("Comments");
   // eslint-disable-next-line react-hooks/exhaustive-deps
