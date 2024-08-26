@@ -1,7 +1,5 @@
 import { useEffect } from "react";
 import Title from "../../components/Title/Title";
-import axios from "axios";
-import { useState } from "react";
 import {
   Paper,
   Skeleton,
@@ -15,39 +13,49 @@ import {
 import { Link } from "react-router-dom";
 import { useAppContext } from "../../components/AppContext/AppContext";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPosts } from "../../store/actions/post.action";
+import {fetchAlbums} from "../../store/actions/album.action";
 
 const Albums = () => {
-    const [album, setAlbums] = useState([]);
-    useEffect(() => {
-      axios.get("https://jsonplaceholder.typicode.com/albums").then((res) => {
-        setAlbums(res.data);
-      });
-  
-    }, []);
-    return (
+  const { setAppTitle } = useAppContext();
+  // const [posts, setPosts] = useState([]);
+  const albums = useSelector((state) => state.album.albums);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // getPosts().then((res) => {
+    //   setPosts(res);
+    // });
+    if (!albums.length) {
+      dispatch(fetchAlbums());
+    }
+  }, [dispatch, albums.length]);
+  useEffect(() => {
+    setAppTitle("Albums");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  return (
     <>
-      <Title>Album</Title>
+      <Title>Albums</Title>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>No:</TableCell>
+              <TableCell>NO:</TableCell>
               <TableCell>Name</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {album.length
-              ? album.map((row) => (
+            {albums.length
+              ? albums.map((row) => (
                   <TableRow
                     key={row.id}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell>{row.id}</TableCell>
                     <TableCell component="th" scope="row">
-                      <Link to={"/posts/" + row.id}>{row.title}</Link>
+                      <Link to={"/albums/" + row.id}>{row.title}</Link>
                     </TableCell>
-                    
+                    <TableCell>{row.body}</TableCell>
                   </TableRow>
                 ))
               : Array.from(Array(5).keys()).map((i) => (
