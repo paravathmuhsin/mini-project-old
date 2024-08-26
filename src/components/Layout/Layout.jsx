@@ -16,6 +16,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ChecklistIcon from "@mui/icons-material/Checklist";
+import GroupIcon from "@mui/icons-material/Group"; // Import GroupIcon
 import {
   Avatar,
   ListItemButton,
@@ -226,6 +227,15 @@ export default function Layout() {
                   <ChecklistIcon />
                 </ListItemIcon>
                 <ListItemText primary="Todo" />
+              </ListItemButton>
+            </Link>
+            <Link to="/users">
+              {/* New Link for Users */}
+              <ListItemButton>
+                <ListItemIcon>
+                  <GroupIcon />
+                </ListItemIcon>
+                <ListItemText primary="Users" />
               </ListItemButton>
             </Link>
           </List>
