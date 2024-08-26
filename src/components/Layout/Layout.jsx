@@ -15,8 +15,9 @@ import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import CommentIcon from "@mui/icons-material/Comment";
 import ChecklistIcon from "@mui/icons-material/Checklist";
-import GroupIcon from "@mui/icons-material/Group"; // Import GroupIcon
+import GroupIcon from "@mui/icons-material/Group";
 import {
   Avatar,
   ListItemButton,
@@ -107,7 +108,11 @@ export default function Layout() {
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <AppBar position="absolute" open={open}>
+        <AppBar
+          position="absolute"
+          open={open}
+          sx={{ backgroundColor: "#753a88" }}
+        >
           <Toolbar
             sx={{
               pr: "24px", // keep right padding when drawer closed
@@ -219,6 +224,14 @@ export default function Layout() {
                   <DashboardIcon />
                 </ListItemIcon>
                 <ListItemText primary="Posts" />
+              </ListItemButton>
+            </Link>
+            <Link to="/comments">
+              <ListItemButton>
+                <ListItemIcon>
+                  <CommentIcon />
+                </ListItemIcon>
+                <ListItemText primary="Comments" />
               </ListItemButton>
             </Link>
             <Link to="/todo">
