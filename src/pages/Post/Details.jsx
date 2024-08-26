@@ -25,12 +25,16 @@ const Details = () => {
       <Title>Post details</Title>
       {post ? (
         <div>
-          <Typography component={"h3"} variant="h5">{post.title}</Typography>
-          <Typography component={"p"} variant="body1">{post.body}</Typography>
+          <Typography component={"h3"} variant="h5">
+            {post.title}
+          </Typography>
+          <Typography component={"p"} variant="body1">
+            {post.body}
+          </Typography>
         </div>
       ) : (
-        variants.map((variant) => (
-          <Typography component="div" key={variant} variant={variant}>
+        variants.map((variant, idx) => (
+          <Typography component="div" key={variant + idx} variant={variant}>
             <Skeleton />
           </Typography>
         ))
