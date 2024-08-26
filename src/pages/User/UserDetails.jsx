@@ -5,7 +5,7 @@ import { useAppContext } from "../../components/AppContext/AppContext";
 import { Skeleton, Typography, Paper, Grid } from "@mui/material";
 import { fetchUser } from "../../store/actions/user.action";
 import { useDispatch, useSelector } from "react-redux";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
 const UserDetails = () => {
@@ -49,10 +49,6 @@ const UserDetails = () => {
                 zoom={13}
                 style={{ height: "300px", width: "100%" }} // Ensure height and width are defined
               >
-                <TileLayer
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                />
                 <Marker position={[lat, lng]}>
                   <Popup>
                     <div>
