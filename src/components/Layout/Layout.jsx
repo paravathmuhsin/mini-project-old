@@ -15,6 +15,7 @@ import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import GroupIcon from "@mui/icons-material/Group"; // Import GroupIcon
 import {
   Avatar,
   ListItemButton,
@@ -217,6 +218,14 @@ export default function Layout() {
                   <DashboardIcon />
                 </ListItemIcon>
                 <ListItemText primary="Posts" />
+              </ListItemButton>
+            </Link>
+            <Link to="/users"> {/* New Link for Users */}
+              <ListItemButton>
+                <ListItemIcon>
+                  <GroupIcon />
+                </ListItemIcon>
+                <ListItemText primary="Users" />
               </ListItemButton>
             </Link>
           </List>
