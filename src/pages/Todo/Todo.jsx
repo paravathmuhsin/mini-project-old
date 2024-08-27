@@ -15,7 +15,7 @@ import { useAppContext } from "../../components/AppContext/AppContext";
 const Todos = () => {
   const { setAppTitle } = useAppContext();
   const dispatch = useDispatch();
-  const todos = useSelector((state) => state.todoReducer.todos);
+  const todos = useSelector((state) => state.todo.todos);
   const navigate = useNavigate();
 
   useEffect(() => {
