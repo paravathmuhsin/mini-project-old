@@ -4,7 +4,7 @@ import Title from "../../components/Title/Title";
 import { getPhoto } from "../../models/photos.models"
 import { useAppContext } from "../../components/AppContext/AppContext";
 import { Skeleton, Typography } from "@mui/material";
-
+import { Link } from "react-router-dom";
 const variants = ["h3", "body1", "body1"];
 const PhotosDetails = () => {
   const [photo, setPhoto] = useState();
@@ -24,9 +24,9 @@ const PhotosDetails = () => {
     <>
       <Title>Photos details</Title>
       {photo ? (
-        <div>
+        <div>  
           <Typography component={"P"} variant="body1">TITLE : {photo.title}</Typography>
-          <Typography component={"p"} variant="body1">URL : {photo.url}</Typography>
+          <Typography component={"p"} variant="body1">URL :<Link to={photo.url}> {photo.url}</Link></Typography>
         </div>
       ) : (
         variants.map((variant) => (
