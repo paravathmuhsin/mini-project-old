@@ -220,8 +220,6 @@ export default function Layout() {
                 <ListItemText primary="Posts" />
               </ListItemButton>
             </Link>
-          </List>
-          <List component="nav">
             <Link to="/albums">
               <ListItemButton>
                 <ListItemIcon>

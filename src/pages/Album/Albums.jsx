@@ -13,18 +13,14 @@ import {
 import { Link } from "react-router-dom";
 import { useAppContext } from "../../components/AppContext/AppContext";
 import { useDispatch, useSelector } from "react-redux";
-import {fetchAlbums} from "../../store/actions/album.action";
+import { fetchAlbums } from "../../store/actions/album.action";
 
 const Albums = () => {
   const { setAppTitle } = useAppContext();
-  // const [posts, setPosts] = useState([]);
   const albums = useSelector((state) => state.album.albums);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // getPosts().then((res) => {
-    //   setPosts(res);
-    // });
     if (!albums.length) {
       dispatch(fetchAlbums());
     }
@@ -55,7 +51,6 @@ const Albums = () => {
                     <TableCell component="th" scope="row">
                       <Link to={"/albums/" + row.id}>{row.title}</Link>
                     </TableCell>
-                    <TableCell>{row.body}</TableCell>
                   </TableRow>
                 ))
               : Array.from(Array(5).keys()).map((i) => (

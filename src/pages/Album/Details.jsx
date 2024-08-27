@@ -5,14 +5,13 @@ import { getAlbum } from "../../models/album.model";
 import { useAppContext } from "../../components/AppContext/AppContext";
 import { Skeleton, Typography } from "@mui/material";
 
-const variants = ["h3", "body1", "body1"];
 const Details = () => {
-  const [post, setPost] = useState();
+  const [album, setAlbum] = useState();
   const { setAppTitle } = useAppContext();
   const { id } = useParams();
   useEffect(() => {
     getAlbum(id).then((res) => {
-      setPost(res);
+      setAlbum(res);
     });
   }, [id]);
 
@@ -23,17 +22,16 @@ const Details = () => {
   return (
     <>
       <Title>Album details</Title>
-      {post ? (
+      {album ? (
         <div>
-          <Typography component={"h3"} variant="h5">{post.title}</Typography>
-          <Typography component={"p"} variant="body1">{post.body}</Typography>
+          <Typography component={"h3"} variant="h5">
+            {album.title}
+          </Typography>
         </div>
       ) : (
-        variants.map((variant) => (
-          <Typography component="div" key={variant} variant={variant}>
-            <Skeleton />
-          </Typography>
-        ))
+        <Typography component="div" key={"h3"} variant={"h5"}>
+          <Skeleton />
+        </Typography>
       )}
     </>
   );
