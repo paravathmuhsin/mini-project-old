@@ -17,7 +17,7 @@ const Details = () => {
   }, [id]);
 
   useEffect(() => {
-    setAppTitle("Post Details");
+    setAppTitle("Album Details");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (

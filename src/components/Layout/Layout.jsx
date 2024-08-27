@@ -222,7 +222,7 @@ export default function Layout() {
             </Link>
           </List>
           <List component="nav">
-            <Link to="/">
+            <Link to="/albums">
               <ListItemButton>
                 <ListItemIcon>
                   <PhotoAlbumIcon />
