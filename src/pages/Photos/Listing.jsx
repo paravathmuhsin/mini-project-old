@@ -1,28 +1,29 @@
 import { useEffect } from "react";
 import Title from "../../components/Title/Title";
-import {
-  Paper,
-  Skeleton,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@mui/material";
-import { Link } from "react-router-dom";
+import { Box, Paper, styled } from "@mui/material";
+import Masonry from "@mui/lab/Masonry";
 import { useAppContext } from "../../components/AppContext/AppContext";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPhotos } from "../../store/actions/photos.action";
+import { Link } from "react-router-dom";
+
+const Label = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  ...theme.typography.body2,
+  padding: theme.spacing(0.5),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
+  borderBottomLeftRadius: 0,
+  borderBottomRightRadius: 0,
+}));
 
 const Photos = () => {
   const { setAppTitle } = useAppContext();
- 
+
   const photos = useSelector((state) => state.photo.photos);
   const dispatch = useDispatch();
 
   useEffect(() => {
-  
     if (!photos.length) {
       dispatch(fetchPhotos());
     }
@@ -34,43 +35,26 @@ const Photos = () => {
   return (
     <>
       <Title>Photos</Title>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Photos Listing</TableCell>
-            
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {photos.length
-              ? photos.map((row) => (
-                  <TableRow
-                    key={row.id}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      <Link to={"/photos/" + row.id}>{row.thumbnailUrl}</Link>
-                    </TableCell>
-                
-                  </TableRow>
-                ))
-              : Array.from(Array(5).keys()).map((i) => (
-                  <TableRow
-                    key={i}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      <Skeleton height={"30px"} />
-                    </TableCell>
-                    <TableCell>
-                      <Skeleton height={"30px"} />
-                    </TableCell>
-                  </TableRow>
-                ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <Box sx={{ minHeight: 829 }}>
+        <Masonry columns={3} spacing={2}>
+          {photos.map((item) => (
+            <Link to={"/photos/" + item.id} key={item.id}>
+              <img
+                src={`${item.thumbnailUrl}`}
+                alt={item.title}
+                loading="lazy"
+                style={{
+                  borderBottomLeftRadius: 4,
+                  borderBottomRightRadius: 4,
+                  display: "block",
+                  width: "100%",
+                }}
+              />
+              <Label>{item.title}</Label>
+            </Link>
+          ))}
+        </Masonry>
+      </Box>
     </>
   );
 };
