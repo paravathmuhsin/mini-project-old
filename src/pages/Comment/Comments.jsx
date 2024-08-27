@@ -1,4 +1,4 @@
-import { useEffect,  } from "react";
+import { useEffect } from "react";
 import Title from "../../components/Title/Title";
 import {
   Paper,
@@ -10,27 +10,27 @@ import {
   TableRow,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-//import { getComments } from "../../models/comment.model";
 import { useAppContext } from "../../components/AppContext/AppContext";
 import { useDispatch, useSelector } from "react-redux";
-import {fetchComments} from "../../store/actions/comment.action"
+import { fetchComments } from "../../store/actions/comment.action";
 
 const Comments = () => {
   const { setAppTitle } = useAppContext();
-  const comments = useSelector((state)=> state.comment.comments)
+  const comments = useSelector((state) => state.comment.comments);
   const dispatch = useDispatch();
 
-  useEffect(() =>{
-    if(!comments.length){
-      dispatch(fetchComments())
+  useEffect(() => {
+    if (!comments.length) {
+      dispatch(fetchComments());
     }
-  } ,[dispatch,comments.length]);
+  }, [dispatch, comments.length]);
   useEffect(() => {
     setAppTitle("Comments");
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  return ( <>
-    <Title>Comments</Title>
+  return (
+    <>
+      <Title>Comments</Title>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -57,6 +57,5 @@ const Comments = () => {
     </>
   );
 };
- 
 
 export default Comments;
