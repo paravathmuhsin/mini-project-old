@@ -2,13 +2,14 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import Loader from "../Loader/Loader";
 
-
 const Login = lazy(() => import("../../pages/Login/Login"));
 const Comments = lazy(() => import("../../pages/Comment/Comments"));
 const CommentsDetails = lazy(() => import("../../pages/Comment/Details"));
 const Layout = lazy(() => import("../../components/Layout/Layout"));
 const Posts = lazy(() => import("../../pages/Post/Posts"));
+const Albums = lazy(() => import("../../pages/Album/Albums"));
 const PostsDetails = lazy(() => import("../../pages/Post/Details"));
+const AlbumsDetails = lazy(() => import("../../pages/Album/Details"));
 const Users = lazy(() => import("../../pages/User/Users"));
 const UserDetails = lazy(() => import("../../pages/User/UserDetails"));
 const Listing = lazy(() => import("../../pages/Photos/Listing"));
@@ -26,6 +27,14 @@ const routes = createBrowserRouter([
         element: <Posts />,
       },
       {
+        path: "albums",
+        element: <Albums />,
+      },
+      {
+        path: "albums/:id",
+        element: <AlbumsDetails />,
+      },
+      {
         path: "posts/:id",
         element: <PostsDetails />,
       },
@@ -36,7 +45,8 @@ const routes = createBrowserRouter([
       {
         path: "comments/:id",
         element: <CommentsDetails />,
-      },{
+      },
+      {
         path: "todo",
         element: <Todo />,
       },

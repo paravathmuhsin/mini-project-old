@@ -15,8 +15,9 @@ import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import ImageIcon from '@mui/icons-material/Image';
-import GroupIcon from "@mui/icons-material/Group"; 
+import PhotoAlbumIcon from "@mui/icons-material/PhotoAlbum";
+import ImageIcon from "@mui/icons-material/Image";
+import GroupIcon from "@mui/icons-material/Group";
 import CommentIcon from "@mui/icons-material/Comment";
 import ChecklistIcon from "@mui/icons-material/Checklist";
 import {
@@ -227,6 +228,14 @@ export default function Layout() {
                 <ListItemText primary="Posts" />
               </ListItemButton>
             </Link>
+            <Link to="/albums">
+              <ListItemButton>
+                <ListItemIcon>
+                  <PhotoAlbumIcon />
+                </ListItemIcon>
+                <ListItemText primary="Albums" />
+              </ListItemButton>
+            </Link>
             <Link to="/comments">
               <ListItemButton>
                 <ListItemIcon>
@@ -251,10 +260,10 @@ export default function Layout() {
                 <ListItemText primary="Users" />
               </ListItemButton>
             </Link>
-            <Link to="/photos"> 
+            <Link to="/photos">
               <ListItemButton>
                 <ListItemIcon>
-                <ImageIcon />
+                  <ImageIcon />
                 </ListItemIcon>
                 <ListItemText primary="Photos" />
               </ListItemButton>

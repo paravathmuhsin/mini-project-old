@@ -8,7 +8,7 @@ import Loader from "../../components/Loader/Loader";
 const TodoDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const todo = useSelector((state) => state.todoReducer.todo);
+  const todo = useSelector((state) => state.todo.todo);
 
   useEffect(() => {
     dispatch(fetchTodo(id));
