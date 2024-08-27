@@ -15,7 +15,11 @@ import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import PhotoAlbumIcon from '@mui/icons-material/PhotoAlbum';
+import PhotoAlbumIcon from "@mui/icons-material/PhotoAlbum";
+import ImageIcon from "@mui/icons-material/Image";
+import GroupIcon from "@mui/icons-material/Group";
+import CommentIcon from "@mui/icons-material/Comment";
+import ChecklistIcon from "@mui/icons-material/Checklist";
 import {
   Avatar,
   ListItemButton,
@@ -106,7 +110,11 @@ export default function Layout() {
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <AppBar position="absolute" open={open}>
+        <AppBar
+          position="absolute"
+          open={open}
+          sx={{ backgroundColor: "#753a88" }}
+        >
           <Toolbar
             sx={{
               pr: "24px", // keep right padding when drawer closed
@@ -226,6 +234,38 @@ export default function Layout() {
                   <PhotoAlbumIcon />
                 </ListItemIcon>
                 <ListItemText primary="Albums" />
+              </ListItemButton>
+            </Link>
+            <Link to="/comments">
+              <ListItemButton>
+                <ListItemIcon>
+                  <CommentIcon />
+                </ListItemIcon>
+                <ListItemText primary="Comments" />
+              </ListItemButton>
+            </Link>
+            <Link to="/todo">
+              <ListItemButton>
+                <ListItemIcon>
+                  <ChecklistIcon />
+                </ListItemIcon>
+                <ListItemText primary="Todo" />
+              </ListItemButton>
+            </Link>
+            <Link to="/users">
+              <ListItemButton>
+                <ListItemIcon>
+                  <GroupIcon />
+                </ListItemIcon>
+                <ListItemText primary="Users" />
+              </ListItemButton>
+            </Link>
+            <Link to="/photos">
+              <ListItemButton>
+                <ListItemIcon>
+                  <ImageIcon />
+                </ListItemIcon>
+                <ListItemText primary="Photos" />
               </ListItemButton>
             </Link>
           </List>
