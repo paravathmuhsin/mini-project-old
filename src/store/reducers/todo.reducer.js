@@ -2,7 +2,7 @@ import { FETCH_TODOS, FETCH_TODO } from "../types/todo.type";
 
 const initialState = {
   todos: [],
-  todo: {},
+  todo: null,
 };
 
 export default function todoReducer(state = initialState, action) {

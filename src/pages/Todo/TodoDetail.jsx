@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchTodo } from "../../store/actions/todo.action";
 import { Typography, Checkbox, Box } from "@mui/material";
 import { useParams } from "react-router-dom";
+import Loader from "../../components/Loader/Loader";
 
 const TodoDetail = () => {
   const { id } = useParams();
@@ -15,7 +16,7 @@ const TodoDetail = () => {
   }, []);
 
   if (!todo) {
-    return <div>Loading</div>;
+    return <Loader />;
   }
   return (
     <Box display="flex" alignItems="center">
